@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<button>ok</button>
+	<script>
+		//(1)
+		// xhtp.onload = function(){
+		// 	data = xhtp.responseText
+		// }
+
+		// fetch('get.json')
+		// 	.then(x => x.json())
+		// 	.then(result => console.log(result));
+
+		// function createPage(val) {
+		// 	console.log(val);
+		// }
+
+		//(2)
+		// let div = document.createElement('div');
+		// div.setAttribute('data-id', 20);
+		// div.setAttribute('data-name', 'Hong');
+
+		// localStorage.setItem('user_id', 'admin');
+
+		// document.querySelector('button').onclick = function(){
+
+		// }
+
+		function Person(first, last, age, eye){
+			this.firstname = first;
+			this.lastname = last;
+			this.age = age;
+			this.eyeColor = eye;
+		}
+
+		console.log(father.age);
+		console.log(son.age, son.gender, son.name());
+		console.log(daughter.age, daughter.gender, daughter.name());
+
+		class Person {
+			constructor(firstName, lastName, age){
+				this.firstName = firstName;
+				this.lastName = lastName;
+				this.age = age;
+			}
+			showName() {
+				return this.firstName + ',' + this.lastName;
+			}
+		}
+		let lee = new Person('순신', '이', 30);
+		console.log(lee.showName());
+
+	</script>
+</body>
+
+</html>
