@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // function callFnc() {
+        //     let ul = $('<ul />').append(
+        //         $('<li>apple</li>'),
+        //         $('<li>mango</li>')
+        //     );
+        //     // ul = document.createElement('ul');
+        //     $(ul).css('color:red;')
+        //         .css('background-color', 'yellow') // 스타일 지정
+        //         .attr('id', 'fruit')
+        //         .attr('class', 'first'); //속성 지정
+        //     $('#show').append(ul);
+        // }
+
+        $(document).ready(yourFnc)
+
+        function yourFnc() {
+            let table = $('<table />').attr('id', 'tbl').attr('border', '1');
+            let thaed = $('<thaed>').append(
+                $('<tr>').append($('<th>이름</th><th>나이</th><th>기능</th>'))
+            )
+            let tr1 = $('<tr />').append($('<th>홍길동</th><th>20</th><th><button>삭제</button></th>'));
+            let tr2 = $('<tr />').append($('<th>김민주</th><th>21</th><th><button>삭제</button></th>'));
+            let tbody = $('<tbody>').append(tr1, tr2);
+            $(table).append(thaed);
+            $(table).append(tbody);
+
+            $('#show').append(table);
+
+            // css -> 요소 찾아오기
+            $('thead>tr:nth-child(1)').css('background-color', 'yellow');
+            // children:하위요소, eq: x+1번째 요소, html:값지정
+            $('tbody>tr').eq(0).children().eq(1).html(30);
+            $('tr').eq(2).children().eq(0).attr('id', 'second');
+            // id값으로 찾아오기 // parent:상위요소, prev:형님
+            console.log($('#second').parent().prev().children().first().attr('id', 'first'));
+            $('#first').next().css('color', 'red');
+
+            //버튼 이벤트
+            $('button').on('click', function () {
+                console.log($(this)); //this=button
+                $(this).parent().parent().remove();
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="show">
+        <!-- <table id='tbl' border="1">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>홍길동</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>김민주</td>
+                    <td>21</td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</body>
+
+</html>

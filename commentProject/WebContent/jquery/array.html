@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="show"></div>
+
+    <script>
+        function Member(id, name, phone) {
+            this.id = id;
+            this.name = name;
+            this.phone = phone;
+        }
+        const members = [new Member('user1', '홍길동', '1234')];
+        members.push(new Member('user2', '김민주', '4567'));
+        members.push(new Member('user3', '설민석', '3456'));
+
+        let table = document.createElement('table');
+        table.setAttribute('border', '1');
+        let tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        document.getElementById('show').appendChild(table);
+
+        members.forEach(function (obj, ind) {
+            let tr = document.createElement('tr');
+            for (let field in obj) {
+                let td = document.createElement('td');
+                td.innerHTML = obj[field];
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        });
+
+        // //jquery(1)
+        // //each: 각각 요소
+        // $('td').each(function (ind, obj) {
+        //     // console.log($(obj));
+        //     $(obj).click(function () {
+        //         window.alert($(this).children().eq(1).text());
+        //     })
+        //     $(this).mouseover(function () { //this = tr태그
+        //         $(this).css('background-color', 'yellow');
+        //     })
+        //     $(this).on('mouseout', function () {
+        //         $(this).css('background-clor', '');
+        //     });
+        // });
+
+        //jquery(2) => 라이브 이벤트 등록
+        $(document).on('click', 'tr', function (event) {
+            window.alert($(event.target).parent().children().eq(1).html());
+        });
+        $(document).on('mouseover', 'tr', function (event) {
+            $(event.target).parent().css('background-color', 'yellow');
+        });
+        $(document).on('mouseout', 'tr', function (event) {
+            $(event.target).parent().css('background-color', '');
+        });
+
+        //$(members).each();
+        $.each(members, function (inx, obj) {
+            console.log(ind, obj);
+            $('<tr />').append(
+                $('<td /').html(obj.id),
+                $('<td /').html(obj.name),
+                $('<td /').html(obj.phone)
+            );
+            // $(table).append($tr);
+            table.appendChild($tr.get(0)); // get() : jquery -> javascript
+        })
+    </script>
+</body>
+
+</html>
