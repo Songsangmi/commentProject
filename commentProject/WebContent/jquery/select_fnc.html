@@ -9,8 +9,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () {
-            $('button').click(findFnc);
+            $('button').eq(0).click(findFnc); //클릭버튼
+            $('button').eq(1).click(delFnc); //삭제버튼
+
+            //삭제(2)
+            // $('button').eq(1).click(function(){
+            //     $('tbody>tr>td>input').filter(':checked').parentsUntil('tbody').remove();
+            // })
         });
+
+        function delFnc() {
+            let delTrVal = $('tbody>tr');
+            $(delTrVal).find('input:checked').parent().parent().remove();
+        }
 
         function findFnc() {
             let trVal = $('tbody>tr');
@@ -50,6 +61,7 @@
 <body>
     <div id="show"></div>
     <button>클릭</button>
+    <button>삭제</button>
     <script>
         fetch('coffee.json')
             .then(x => x.json())
