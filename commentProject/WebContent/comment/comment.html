@@ -10,7 +10,6 @@
 		}
 	</style>
 	<script>
-		//onload 기억하기..검색해...
 		window.onload = function () {
 			loadCommentList();
 		}
@@ -20,11 +19,9 @@
 			xhtp.onload = function () {
 				let listDiv = document.getElementById('commentList');
 
-				//파싱? 데이타라는 변수에? JSON 타입으로 변환해서 담는다???
 				let data = JSON.parse(xhtp.responseText);
 				console.log(data);
 				for (let i = 0; i < data.length; i++) {
-					//파싱한 데이터를 commentDiv에 담아서 listDiv의 자식으로(하위에) 넣어준다
 					let commentDiv = makeCommentView(data[i]); //{id: ?, name:?, content:?}
 					listDiv.appendChild(commentDiv);
 				}
@@ -33,13 +30,10 @@
 			xhtp.send();
 		}
 
-		//값을 주면 div 태그를 가지고 온다 
 		function makeCommentView(comment) {
 			let div = document.createElement('div');
-			//comment가 가지고 있는 ID 속성을 
 			div.setAttribute('id', comment.id);
 			div.setAttribute('class', 'comment');
-			//comment라는 속성에 comment 오브젝트를 담았다 
 			div.comment = comment; //{id:?, name:?, content:?}
 			div.setAttribute('data-id', comment.id);
 			div.setAttribute('data-name', comment.name);
@@ -48,7 +42,6 @@
 			let str = '<strong>' + comment.name + '</strong>' + comment.content +
 				'<input type="button" value="수정" onclick="viewUpdateForm(' + comment.id + ')">' +
 				'<input type="button" value="삭제" onclick="confirmDeletion(' + comment.id + ')">'
-			//div 태그 안에 str가 들어감 
 			div.innerHTML = str;
 
 			return div;
@@ -58,9 +51,7 @@
 		function addComment() {
 			let name = document.addForm.name.value;
 			let content = document.addForm.content.value;
-			//만약 name 값이 없으면? 
 			if (name == "") {
-				//window 가지고 있는 alert 소환..? 팝업창~? 
 				window.alert('이름을 입력하세요!');
 				document.addForm.name.focus();
 				return;
@@ -93,7 +84,7 @@
 			let commentList = document.getElementById('commentList');
 			commentDiv.after(updateFormDiv);
 
-			//선택한 요소의 값 -> 수정화면 폼에 보여줌 
+			//선택한 요소의 값 -> 수정화면 폼
 			document.updateForm.id.value = commentDiv.comment.id;
 			document.updateForm.name.value = commentDiv.comment.name;
 			document.updateForm.content.value = commentDiv.comment.content;
@@ -114,9 +105,7 @@
 				let data = JSON.parse(xhtp.responseText);
 				let commentDiv = makeCommentView(data);
 				let listDiv = document.getElementById('commentList');
-				// 구분하려고 넣은 id 값? 
 				let oldCommentDiv = document.getElementById(id);
-				//commentDiv-새로운 값으로 oldCommentDiv-옛날 값을 대치하겠습니다??????
 				listDiv.replaceChild(commentDiv, oldCommentDiv);
 
 				document.getElementById('commentUpdate').style.display = 'none';
@@ -128,7 +117,7 @@
 			xhtp.send('name=' + name + '&content=' + content + '&cmd=mod&id=' + id);
 		}
 
-		//취소버튼->수정화면은 숨기고 입력화면 나온다 
+		//취소버튼->입력화면
 		function cancelComment() {
 			document.getElementById('commentUpdate').style.display = 'none';
 			document.getElementById('commentAdd').style.display = 'block';
@@ -148,7 +137,6 @@
 					window.alert('처리중 에러가 발생했습니다');
 					return;
 				}
-				//화면에서 삭제 fail가 아니면 지운다 
 				document.getElementById(deleteId).remove();
 			}
 
